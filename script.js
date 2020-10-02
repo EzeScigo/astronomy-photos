@@ -9,7 +9,7 @@ let podArray = [];  // Array
 let favObj = {}; // Obj
 
 const count = 10;
-const apiKey = 'DEMO_KEY';
+const apiKey = 'YuB4qvLOg7EbfVUqf9pbYfhRsLg6iZltOw8LD8s2';
 const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&count=${count}`;
 
 // Helper Function to Set Attributes on DOM Elements
