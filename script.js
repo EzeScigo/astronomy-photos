@@ -26,7 +26,6 @@ function createDOMNodes(page) {
     if (page === 'favorites') {
         arrayDOM = Object.values(favObj);
     }
-    console.log('current array', page, arrayDOM);
     arrayDOM.forEach((photo) => {
 
         // Create New div with class "card"
@@ -118,17 +117,22 @@ function createDOMNodes(page) {
 
 function updateDOM(page) {
     // Get Favorites from localStorage
+    loader.classList.remove('hidden');
     if (localStorage.getItem('nasaFavorites')) {
         favObj = JSON.parse(localStorage.getItem('nasaFavorites'));
     }
     // Refresh Image Container
     imageContainer.textContent = '';
+    loader.classList.add('hidden');
     createDOMNodes(page);
 }
 
 // Get Picture Of the Day data from NASA APOD API
 async function getPicture() { 
     try {
+        // Show Loader animation
+        loader.classList.remove('hidden');
+        // API request
         const response = await fetch(apiUrl);
         podArray = await response.json();
         updateDOM('home');
@@ -169,6 +173,18 @@ function removeFavorite(itemUrl) {
             removeConfirmed.hidden = true;
         }, 2000);
     }
+}
+
+// Show Favorites Navbar
+function showFavNav() {
+    resultsNav.classList.add('hidden');
+    favoritesNav.classList.remove('hidden');
+}
+
+// Show Results Navbar
+function showResultsNav() {
+    resultsNav.classList.remove('hidden');
+    favoritesNav.classList.add('hidden');
 }
 
 // On Load
